@@ -1,0 +1,537 @@
+body {
+  background: url(img/gulf-of-alaska.jpg) no-repeat;
+  background-size: cover;
+  margin:0;
+  padding:0;
+}
+
+* {box-sizing: border-box;}
+
+.App {
+  background: rgba(255,255,255,.9);
+  box-shadow: 0px 0px 22px 11px rgba(0,0,0,0.25);
+  border-radius: 12px; 
+  max-width: 80%;
+  margin: 75px auto;
+  padding:0 0 5px 0;
+  position: relative;
+  text-align: left;
+  width: fit-content;
+}
+
+.page-wrapper {
+  background: #fafafa;
+  border: 1px solid silver;
+  border-radius: 8px;
+  /* margin: 15px;
+  padding: 15px; */
+  
+  margin: 15px;
+  padding: 15px;
+}
+
+.page-wrapper .button-wrapper {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.page-wrapper .button-wrapper .myButton.solo {
+  border-radius: 4px;
+  font-size: 18px;
+  width: 200px;
+}
+.page-wrapper h2 {
+  margin:0;
+}
+
+.all-items-wrapper {
+  max-height: 750px;
+  overflow-x: auto;
+  padding-bottom: 25px;
+}
+
+
+label {
+  color: #333;
+  display:block;
+  font-size:15px;
+  font-weight: 700;
+  margin-bottom:8px;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid silver;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+input[date]{
+  font-size: 15px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+h1 {
+  color: #333;
+  margin:0;
+  padding:0;
+  text-transform: capitalize;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
+h2 {
+  font-variant: small-caps;
+}
+h1,
+h2,
+h4,
+p {
+  color: #444;
+  margin: 15px;
+}
+
+.add-me {
+  background: white;
+  border:6px solid #333;
+  border-radius: 50%;
+  height:44px;
+  left:-15px;
+  position:absolute;
+  top:-15px;
+  width:44px;
+  z-index: 33;
+}
+
+.add-me::after {
+  color: #333;
+  content: '+';
+  font-size: 24px;
+  font-weight:bolder;
+  left:8px;
+  position: absolute;
+  z-index: 74;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.form-list {
+  background: #fafafa;
+  border: 1px solid silver;
+  border-radius: 8px;
+  margin:15px;
+  padding: 0 0 15px 0;
+}
+
+.form-list li {
+  border-radius: 5px;
+  list-style: none;
+  margin: 0 10px;
+  padding: 5px 15px 8px 10px;
+}
+
+.form-list li:nth-child(even) {
+  background: #ededed;
+}
+
+.form-list li:last-child {
+  background: #ededed;
+}
+
+.form-list li label {
+  margin:0;
+  padding:0;
+}
+
+.onoffswitch {
+  position: relative;
+  width: 220px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 20px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "Yes! I'm done and fishing.";
+  padding-left: 10px;
+  background-color: #34A7C1;
+  color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+  content: "No! It's complicated.";
+  padding-left: 56px;
+  background-color: #EEEEEE;
+  color: #333;
+  text-align: left;
+}
+
+.onoffswitch-switch {
+  display: block;
+  height: 18px;
+  width: 18px;
+  margin: 6px;
+  background: #FFFFFF;
+  position: absolute;
+  /* top: 0; */
+  bottom: 2px;
+  right: 56px;
+  right: 0;
+  border: 2px solid #999999;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+  left:unset;
+  right: 0px;
+  background: lime;
+}
+
+.onoffswitch-checkbox+.onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+  background: orange;
+  left:10px;
+}
+
+.error {
+  background: white;
+  border:5px dashed red;
+  color: #333;
+  padding: 15px;
+}
+
+.error-text {
+  color:red;
+}
+
+.all-items {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin:0;
+  justify-content:space-evenly;
+  padding:0;
+}
+
+.all-items li {
+  align-content: space-around;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0px 0px 12px 0 rgba(0,0,0,0.25);
+  display: inline-block;
+  /* margin: 5px; */
+  margin: 0 5px 24px 5px;
+  padding:10px ;
+  min-width: none;
+}
+
+.all-items .image-wrapper {
+  border-radius: 4px;
+  display:block;
+  height: 260px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 346px;
+}
+
+.all-items img {
+  border:1px solid silver;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-height: 260px;
+  max-width: 346px;
+}
+.all-items h4 {
+  color: #333;
+  font-variant: small-caps;
+  margin: 10px 0;
+}
+
+.item-image {
+  display:block;
+  margin: 0 auto;
+  max-width: 800px;
+  width:100%;
+}
+
+.item-description-list {
+  list-style: none;
+  margin:15px;
+  /* max-width: 600px; */
+  padding:0;
+}
+
+.item-description-list li {
+  margin: 5px 0 10px 0;
+  padding:0;
+}
+
+.item-description-list li em {
+ font-weight: bold;
+}
+
+.SubmitMe {
+  background: red;
+  border: 2px solid silver;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 10px;
+  width: auto;
+}
+
+.SubmitMe:active,
+.SubmitMe:hover {
+  background: darkred;
+  color: white;
+}
+
+.myButton,
+.linkButton {
+  background: white;
+  border:1px solid lightgray;
+  border-radius: 4px;
+  color: #444;
+  cursor:pointer;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-right:15px;
+  outline:0;
+  padding: 2px 8px;
+  justify-content: flex-end;
+}
+
+button.myButton:hover,
+.linkButton:hover {
+  background:darkred;
+  color: #fff;
+}
+
+button.myButton:focus,
+button.myButton.active,
+.linkButton:focus,
+.linkButton:active {
+  background: darkred;
+  color: #fff;
+  /* border: 2px solid red; */
+} 
+
+.linkButton {
+  margin-right:15px;
+  text-decoration: none;
+  color: #444;
+}
+
+.myButton.secondary {
+  background: white;
+  color: #444;
+}
+
+header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; 
+  padding:15px;
+  margin: 0;
+}
+
+header h1 {
+  align-self: center;
+  flex-basis: 60%;
+  flex: 1;
+  font-size: 30px;
+  margin: 0 15px 0 0;
+  padding:0;
+}
+
+.header {
+  margin: 0 30px
+}
+
+.button-wrapper {
+  margin: auto;
+  text-align: center;
+} 
+
+.button-wrapper.right {
+  margin: 0 15px;
+  text-align: right;
+} 
+
+header .button-wrapper {
+  display: flex;
+  justify-content:flex-end;
+  flex-basis: 40%;
+  flex: 1;
+  margin:15px auto;
+  padding:0;
+  text-align: right;
+}
+
+.button-wrapper button.myButton {
+  background-color: white;
+  border-radius: 0;
+  border-right: 0;
+  color: #444;
+  margin:0;
+  white-space: nowrap;
+}
+
+.button-wrapper button.myButton:first-child{
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.button-wrapper button.myButton:last-child {
+  border-right: 1px solid lightgray;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.button-wrapper button.myButton:hover,
+.button-wrapper button.myButton:active {
+  background-color: darkred;
+  color: white;
+}
+
+.button-row {
+  margin: 15px;
+}
+
+.truncate {
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.debug {
+  border: 1px dashed red;
+  color: red;
+}
+
+.socket-message {
+  color: #999;
+  list-style: none;
+}
+
+.signed-in {
+  display:block;
+  margin-top: -20px;
+  padding: 0 25px;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .App {
+    background: rgba(255,255,255,1.0);
+    box-shadow: 0;
+    border-radius: 0; 
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  header .button-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-basis: 40%;
+    flex: 1 1;
+    margin: 15px auto;
+    padding: 0;
+    text-align: right;
+}
+} 

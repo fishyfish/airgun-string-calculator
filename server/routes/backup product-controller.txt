@@ -1,0 +1,70 @@
+module.exports = {
+//     getAll: (req, res) => {
+//         Product.find()
+//         .then((AllProducts) =>{
+//             console.log(AllProducts);
+//             res.json(AllProducts);
+//         })
+//         .catch((err) =>{
+//             console.log('error in getAll: ' + err);
+//         })
+// },
+
+// create: (req,res) => {
+//     // create a product in the db
+//     console.log(req.body);
+//     Product.create(req.body)
+//     .then((newProduct) => {
+//         console.log(newProduct);
+//     })
+//     .catch((err) =>{
+//         console.log('error in create: ' + err);
+//         res.json(err);
+//     })
+// },
+
+// getOne: (req,res) => {
+//     // get a single product by ID
+//     console.log(req.params.id);
+//     Product.findById(reg.params.id)
+//     .then((oneProduct) => {
+//         console.log(oneProduct);
+//         res.json(oneProduct);
+//     })
+//     .catch((err) => {
+//         console.log('error in getOne: ' + err);
+//         res.json(err);
+//     })
+// },
+// update: (req,res) => {
+//     // get a single product by ID
+//     console.log(req.params.id);
+//     console.log(req.body);
+//     Product.findByIdAndUpdate(req.params.id, req.body, {
+//         new: true,
+//         runValidators: true,
+//     })
+//     .then((updatedProduct) => {
+//         console.log(updatedProduct);
+//         res.json(updatedProduct);
+//     })
+//     .catch((err) => {
+//         console.log('error in update: ' + err);
+//         res.json(err);
+//     })
+// },
+// delete: (req,res) => {
+//     // remove a single product by ID
+//     console.log("Trying to remove this " + req.params.id);
+//     Product.findByIdAndDelete(req.params.id, req.body,)
+//     .then((removedProduct) => {
+//         console.log("Removed this product " + removedProduct);
+//         res.json(removedProduct);
+//     })
+//     .catch((err) => {
+//         console.log('error in delete: ' + err);
+//         res.json(err);
+//     })
+// },
+
+// }
