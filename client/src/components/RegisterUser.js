@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Register = props => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -14,8 +13,7 @@ const Register = props => {
         event.preventDefault();
 
         const newUser = {
-            firstName,
-            lastName,
+            userName,
             email,
             password,
             confirmPassword,
@@ -28,8 +26,7 @@ const Register = props => {
             .then(res => {
                 console.log(res.data);
 
-                setFirstName("");
-                setLastName("");
+                setUserName("");
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
@@ -49,29 +46,17 @@ const Register = props => {
             }
             <form onSubmit={register}>
                 <div>
-                    <label>First Name</label>
+                    <label>User Name</label>
                     {
-                        errs.firstName ? <span className="error-text">{errs.firstName.message}</span> : null
+                        errs.userName ? <span className="error-text">{errs.userName.message}</span> : null
                     }
                 
                 <input type="text"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    name="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                  />
                 </div>
-                <div>
-                    <label>Last Name</label>
-                    {
-                        errs.lastName ? <span className="error-text">{errs.lastName.message}</span> : null
-                    }
-                
-                <input type="text"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                 />
-                 </div>
                 <div>
                 <label>Email</label>
                     {

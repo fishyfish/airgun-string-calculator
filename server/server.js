@@ -21,7 +21,7 @@ app.use(cookieParser());
 //require('./config/mongoose.config');
 require('./config/mongoose.config')(process.env.DB_NAME);
 
-require('./routes/skiffs.route')(app);
+require('./routes/airgunStrings.route')(app);
 require('./routes/user.routes')(app);
 
 // this is showing undefined.
@@ -46,24 +46,24 @@ io.on("connection", (socket) => {
     // send a message to ONLY the client that just connected
     socket.emit('your_socket_id', socket.id);  
 
-    socket.on("added_skiff", (data) => {
-        console.log("New Skiff Added:");
+    socket.on("added_airgunString", (data) => {
+        console.log("New Airgun String Added:");
         console.log(data);
-        // send a message to ALL clients EXCEPT for the one that added the skiff
-        socket.broadcast.emit("new_added_skiff", data);
+        // send a message to ALL clients EXCEPT for the one that added the airgun string
+        socket.broadcast.emit("new_added_airgunString", data);
     });
 
-    socket.on("edited_skiff", (data) => {
-        console.log("Skiff Edited:");
+    socket.on("edited_airgunString", (data) => {
+        console.log("Airgun String Edited:");
         console.log(data);
-        // send a message to ALL clients EXCEPT for the one that edited the skiff
-        socket.broadcast.emit("edited_skiff", data);
+        // send a message to ALL clients EXCEPT for the one that edited the airgun string
+        socket.broadcast.emit("edited_airgunString", data);
     });
 
-    socket.on("deleted_skiff", (data) => {
-        console.log("skiff was deleted");
+    socket.on("deleted_airgunString", (data) => {
+        console.log("airgun string was deleted");
         console.log(data);
-        socket.broadcast.emit("remove_skiff", data);
+        socket.broadcast.emit("remove_airgunString", data);
     })
 
     socket.on("disconnect", (data) => {

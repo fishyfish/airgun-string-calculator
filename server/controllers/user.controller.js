@@ -35,7 +35,7 @@ module.exports = {
                 .json ({
                     msg: "success, user logged in",
                     userLogged: {
-                        username: `${user.firstName} ${user.lastName}`,
+                        username: `${user.userName}`,
                     }
                 });
             } else {
