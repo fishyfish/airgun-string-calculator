@@ -43,14 +43,14 @@ const Header = () => {
     return (
         <div>
             <header>
-                <h1>Tolman Skiff Projects</h1>
+                <h1>Airgun String Calculator</h1>
                 
                 <div className="button-wrapper">
-                    <button className="myButton" onClick={() => navigate("/")}>All Skiffs</button>
+                    <button className="myButton" onClick={() => navigate("/")}>All Strings</button>
                     <button className="myButton"  onClick={() => navigate("/logreg")}>Login / Register</button>
                     <button className="myButton"  onClick={(e) => logout(e)}>Logout</button>
-                    <button className="myButton" onClick={() => navigate(`/skiffs/new/`)}>
-                        Add Tolman Skiff
+                    <button className="myButton" onClick={() => navigate(`/string/new/`)}>
+                        Add Airgun String
                     </button>
                     {/* <button onClick={getLoggedInUser}>Check My Brain for a Contusion.</button> */}
                 </div>

@@ -13,7 +13,7 @@ profileName: {
     minlength: [3, "Your profile name must be at least 3 characters long"],
 },
 
-airGunModel: { 
+airgunModel: { 
     type: String,
     required: [true, "You must have an airgun name and model"],
     minlength: [3, "Your airgun name and model must be at least 3 characters long"],
@@ -32,15 +32,13 @@ date: {
         // how to set today's date automatically? maybe in the form field?
         type: Date,
         required: [true, "You must include a date"],
-        min: ['2020-01-01', "Sorry you can't have a date in the past - please try again!"],
-        max: [ new Date(), "You cannot say you are starting in the future"],
     }, 
 startPressure: { 
     type: Number,
     required: [true, "Please set a starting pressure in PSI"],
     minlength: [3, "Your starting pressure should be at least 3 characters long"],
 },
-finishPressure: { 
+endingPressure: { 
     type: Number,
     required: [true, "Please set an ending pressure in PSI"],
     minlength: [3, "Your ending pressure should be at least 3 characters long"],
@@ -54,8 +52,8 @@ velocity: {
 },
 pelletWeight: { 
     type: Number,
-    required: [true, ""],
-    minlength: [3, "Your starting pressure should be at least 3 characters long"],
+    required: [true, "You should input your pellet weight so we can calulate your string"],
+    minlength: [2, "Your pellet weight should be at least 2 characters long"],
 },
 fpe: { 
     type: Number,

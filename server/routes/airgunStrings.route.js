@@ -7,6 +7,6 @@ module.exports = (app) => {
     app.get('/api/airgunStrings', airgunStringsController.getAll);
     app.post('/api/airgunStrings', authenticate, airgunStringsController.create);
     app.get('/api/airgunString/:id', airgunStringsController.getOne);
-    app.put('/api/airgunString/:id', authenticate, airgunStringsController.update);
+    app.put('/api/airgunString/:id/edit', authenticate, airgunStringsController.update);
     app.delete('/api/airgunString/:id', authenticate, airgunStringsController.delete);
 }

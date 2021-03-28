@@ -3,9 +3,9 @@ const AirgunString = require('../models/airgunStrings.model');
 module.exports = {
     getAll: (req, res) => {
         AirgunString.find()
-        .sort({ userName: "ascending"})
+        .sort({ profileName: "ascending"})
         .then((allAirgunStrings) =>{
-            res.json(AirgunStrings);
+            res.json(allAirgunStrings);
         })
         .catch((err) =>{
             console.log('error in getAll: ' + err);
