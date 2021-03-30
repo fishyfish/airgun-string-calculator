@@ -17,9 +17,6 @@ const NewString = (prop) => {
     const [ date, setDate] = useState('');
     const [ velocity, setVelocity] = useState('');
     const [ pelletWeight, setPelletWeight] = useState('');
-    // const [ pictureUrl, setPictureUrl] = useState('');
-    // const [ pictureDescription, setPictureDescription] = useState('');
-    // const [ description, setDescription] = useState('');
     const [errs, setErrs] = useState({});
 
  
@@ -66,7 +63,7 @@ const NewString = (prop) => {
 
     return (
         <div>
-            <h2>Add a New Airgun String </h2>
+            <h2>Add a New Airgun Profile </h2>
             <form onSubmit={submitForm}>
                 <ol className="form-list">
                 <li>
@@ -130,7 +127,7 @@ const NewString = (prop) => {
                     <input id="date" type="date"
                         name="date"
                         value={date}
-                        placeholder=""
+                        placeholder="DD/MM/YYYY"
                         onChange = {(e) => setDate(e.target.value)}
                         />
                         {
@@ -168,19 +165,8 @@ const NewString = (prop) => {
                         }
                 </li>
                 <li>
-                    <label>Velocity</label>
-                    <input type="number"
-                        name="velocity"
-                        value={velocity}
-                        onChange = {(e)=>setVelocity(e.target.value)}
-                        />
-                        {/* {
-                            errs.stockLength ?
-                            <span className="error-text">{errs.stockLength.message}</span>
-                            :null
-                        } */}
-                </li>
-
+                        <h2>Create String</h2>
+                </li> 
                 <li>
                     <label>Pellet Weight (grains)</label>
                     <input type="number"
@@ -188,15 +174,28 @@ const NewString = (prop) => {
                         value={pelletWeight}
                         onChange = {(e)=>setPelletWeight(e.target.value)}
                         />
-                        {/* {
+                         {
                             errs.pelletWeight ?
                             <span className="error-text">{errs.pelletWeight.message}</span>
                             :null
-                        } */}
+                        }
+                </li>
+                <li>
+                    <label>Velocity</label>
+                    <input type="number"
+                        name="velocity"
+                        value={velocity}
+                        onChange = {(e)=>setVelocity(e.target.value)}
+                        />
+                        {
+                            errs.stockLength ?
+                            <span className="error-text">{errs.stockLength.message}</span>
+                            :null
+                        } 
                 </li>
                 <li>
                     <button type="button" className="myButton secondary" onClick={() => navigate(`/`)}>Cancel</button>
-                    <button type="submit" className="myButton">Add My String</button>
+                    <button type="submit" className="myButton">Add My Profile</button>
                 </li>
                 </ol>
             </form>

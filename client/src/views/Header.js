@@ -43,14 +43,18 @@ const Header = () => {
     return (
         <div>
             <header>
-                <h1>Airgun String Calculator</h1>
+                <img id="logo" src="/orange-black-target.png" alt="orange black target" />
+                <div id="header-wrapper">
+                    <h1>Airgun String Calculator</h1>
+                    <p>Precision Target Shooting by Design</p>
+                </div>
                 
                 <div className="button-wrapper">
-                    <button className="myButton" onClick={() => navigate("/")}>All Strings</button>
+                    <button className="myButton" onClick={() => navigate("/")}>All Profiles</button>
                     <button className="myButton"  onClick={() => navigate("/logreg")}>Login / Register</button>
                     <button className="myButton"  onClick={(e) => logout(e)}>Logout</button>
                     <button className="myButton" onClick={() => navigate(`/string/new/`)}>
-                        Add Airgun String
+                        Add Profile
                     </button>
                     {/* <button onClick={getLoggedInUser}>Check My Brain for a Contusion.</button> */}
                 </div>

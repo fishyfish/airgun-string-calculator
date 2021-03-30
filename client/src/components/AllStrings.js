@@ -123,7 +123,6 @@ const AllStrings = (prop) => {
             {
                 allStrings.map((string, index) =>(
                     <li key={index}>
-                        {/* <span className="image-wrapper"><img onClick={() => navigate(`/airgunString/${airgunString._id}`)} src={ airgunString.pictureUrl } alt={ airgunString.pictureDescription } title={ airgunString.pictureDescription }/></span> */}
                         <h4>{ `${string.profileName }'s  "Airgun String"`}</h4>
                         <div className="button-wrapper">
                             <button className="myButton secondary" onClick={() => navigate(`/string/${string._id}`)}>View Airgun String Details</button>
@@ -138,7 +137,6 @@ const AllStrings = (prop) => {
             <ul className="socket-message">
                 <li>Socket ID: {socketId}</li>  
                 <li>Airgun String Count: {stringCount}</li>
-                {/* <li>Welcome, {email}</li> */}
                 <li>{ socketMessage }...</li>
             </ul>
         </div>

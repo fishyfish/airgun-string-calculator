@@ -74,11 +74,18 @@ const EditString = (props) => {
                 
             .catch(err=>console.log(err))
         };
+        // const initialList = [
+        //     {
+        //       id: 'a',
+        //       name: 'Robin',
+        //     },
+        //   ];
+        // const [list, setList] = React.useState(initialList);
 
         return (
             <form onSubmit={onSubmitHandler}>
                 <div className="form-list">
-                <h2>Edit Airgun String</h2>
+                <h2>Edit Profile</h2>
                 <ol className="form-list" key={props.id}>
                     <li>
                         <label>Profile Name</label>
@@ -118,7 +125,7 @@ const EditString = (props) => {
                     </li>
                     <li>
                         <label>Date</label>
-                        <input type="date" placeholder={airgunString.Date} defaultValue={airgunString.Date} onChange = {(e)=>setDate(e.target.value)}/>
+                        <input type="date" placeholder={airgunString.Date} defaultValue={airgunString.Date} onChange = {(e)=>setDate(e.target.value)} placeholder="DD/MM/YYYY" />
                         {
                             errs.date ?
                             <span className="error-text">{errs.date.message}</span>
@@ -145,16 +152,10 @@ const EditString = (props) => {
                         }
                     </li>
                     <li>
-                        <label>Velocity (fps)</label>
-                        <input type="text" defaultValue={airgunString.velocity} onChange = {(e)=>setVelocity(e.target.value)}/>
-                        {
-                            errs.velocity ?
-                            <span className="error-text">{errs.velocity.message}</span>
-                            :null
-                        }
-                    </li>
+                        <h2>Create / Add String</h2>
+                    </li> 
                     <li>
-                        <label>Pellet Weight (grains)</label>
+                        <label>Pellet Weight (grains) - Should be same for all shots in a string.</label>
                         <input type="number" defaultValue={airgunString.pelletWeight} onChange = {(e)=>setPelletWeight(e.target.value)}/>
                         {
                             errs.pelletWeight ?
@@ -162,10 +163,35 @@ const EditString = (props) => {
                             :null
                         }
                     </li>
+                    <li>
+                        {/* defaultValue={airgunString.velocity} */}
+                        <label>Velocity (fps)</label>
+                        <input type="text"  onChange = {(e)=>setVelocity(e.target.value)}/>
+                        {
+                            errs.velocity ?
+                            <span className="error-text">{errs.velocity.message}</span>
+                            :null
+                        }
+                        <button id="add-to-string" type="button" className="myButton">Add to String</button> 
+                    </li>
+                    {/* {velocity.map((item) => (
+                        <li key={allStrings}>{airgunString.velocity}</li>
+                    ))} */}
+                     <li>
+                        <h2>Edit String (value is editable in field. Click X to remove.)</h2>
+                    </li> 
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="955"  /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="850"  /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="870" /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="880"  /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="875"  /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="850" /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="855"  /> fps</li>
+                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="860"  /> fps</li>
                 </ol>
                 <br />
                 <div className="button-wrapper right">
-                     <button type="submit" className="myButton">Update Airgun String</button> 
+                     <button type="submit" className="myButton">Update Profile</button> 
                     <button type="button" className="myButton secondary"  onClick={() => navigate(`/`)}>
                         Back to All Strings
                     </button>

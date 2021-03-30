@@ -4,6 +4,19 @@ body {
   padding:0;
 }
 
+#logo {
+  display: inline-block;
+  height: 50px;
+  margin-right: 5px;
+  width: 50px;
+}
+
+#header-wrapper h1,
+#header-wrapper p {
+  margin:0 15px 0 0;
+  padding:0;
+}
+
 * {box-sizing: border-box;}
 
 .App {
@@ -79,6 +92,7 @@ input[date]{
 
 h1 {
   color: #333;
+  display:block;
   margin:0;
   padding:0;
   text-transform: capitalize;
@@ -500,6 +514,47 @@ header .button-wrapper {
   padding: 0 25px;
   text-align: right;
 }
+
+.align-right {
+  padding: 0 15px;
+  text-align:right;
+}
+
+.computations {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.computations li {
+  background: #EDEDED;
+  margin-bottom: 4px;
+}
+
+ol.string {
+  list-style:decimal;
+  margin: 16px 0;
+  padding: 0 0 0 40px;
+}
+
+ol.string li {
+  list-style: decimal;
+  margin:16px 0;
+  padding: 0 0 0 40px;
+
+}
+
+ol.string em {
+  display: inline-block;
+  width: 220px;
+}
+
+ol.string label,
+ol.string input {
+  display:inline-block;
+  width: 50%;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

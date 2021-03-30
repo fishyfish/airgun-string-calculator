@@ -16,10 +16,8 @@ const OneString = (props) => {
     },[])
     return (
         <div className="form-list">
-                {/* instead of profileName should this be user name and then authenticate?  */}
-                <h2>{airgunString.profileName}'s Airgun String</h2>
+                <h2>{airgunString.profileName}'s String</h2>
                 <ol className="item-description-list">
-                    {/* <li className="newLine"><img className="item-image" src={skiff.pictureUrl} /></li> */}
                     <li className="newLine"><em>Profile Name:</em> {airgunString.profileName}</li> 
                     <li className="newLine"><em>Airgun Model:</em> {airgunString.airgunModel}</li> 
                     <li className="newLine"><em>Pellet Brand:</em> {airgunString.pelletBrand}</li>
@@ -27,13 +25,28 @@ const OneString = (props) => {
                     
                     <li className="newLine"><em>Date:</em> {airgunString.date}</li>
                     <li className="newLine"><em>Starting Pressure:</em> {airgunString.startPressure} psi</li>
-                    <li className="newLine"><em>Ending Pressure:</em> {airgunString.endingPressure} psi</li>
-                    <li className="newLine"><em>Pellet Weight:</em> {airgunString.pelletWeight} grains</li>
-                    <li className="newLine"><em>Velocity:</em> {airgunString.velocity} fps</li>
-                    {/* <li className="newLine truncate"><em>Picture Url:</em> <a target="_blank" href={airgunString.pictureUrl}>{airgunString.pictureUrl}</a></li>
-                    <li className="newLine"><em>Picture Description:</em> {airgunString.pictureDescription}</li>
-                    <li className="newLine"><em>Description:</em> {airgunString.description}</li> */}
-                    <li className="newLine"><em>ID:</em> {airgunString._id}</li>
+                    <li className="newLine"><em>Ending Pressure:</em> {airgunString.endingPressure} psi</li>  
+                </ol>
+                {/* needs wiring up below */}
+                <h2>Computations</h2>
+                <ul className="computations">
+                    <li>Avg: (avg)</li>
+                    <li>High: (high)</li>
+                    <li>Spread: (spread)</li>
+                    <li>Std Dev: (std-dev)</li>
+                    <li>Shot Count: (shot-count)</li>
+                </ul>
+                <h2>String</h2>
+                <p><em>Pellet Weight:</em> {airgunString.pelletWeight} grains</p>
+                <ol className="string">
+                    <li><em>Velocity:</em> {airgunString.velocity} fps</li>
+                    <li><em>Velocity:</em> 850fps</li>
+                    <li><em>Velocity:</em> 870fps</li>
+                    <li><em>Velocity:</em> 880fps</li>
+                    <li><em>Velocity:</em> 875fps</li>
+                    <li><em>Velocity:</em> 850fps</li>
+                    <li><em>Velocity:</em> 855fps</li>
+                    <li><em>Velocity:</em> 860fps</li>
                 </ol>
                 <p>
                 <button className="myButton secondary" onClick={() => navigate(`/`)}>
@@ -43,6 +56,7 @@ const OneString = (props) => {
                     Edit
                 </Link> 
                 </p>
+                <div className="align-right"><em>ID:</em> {airgunString._id}</div>
         </div>
     )
 }
