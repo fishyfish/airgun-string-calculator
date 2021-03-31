@@ -151,11 +151,12 @@ const EditString = (props) => {
                             :null
                         }
                     </li>
-                    <li>
+                    </ol>
+                   
                         <h2>Create / Add String</h2>
-                    </li> 
+                     <ol className="form-list">   
                     <li>
-                        <label>Pellet Weight (grains) - Should be same for all shots in a string.</label>
+                        <label>Pellet Weight (grains) - Same for all shots in a string.</label>
                         <input type="number" defaultValue={airgunString.pelletWeight} onChange = {(e)=>setPelletWeight(e.target.value)}/>
                         {
                             errs.pelletWeight ?
@@ -172,22 +173,26 @@ const EditString = (props) => {
                             <span className="error-text">{errs.velocity.message}</span>
                             :null
                         }
-                        <button id="add-to-string" type="button" className="myButton">Add to String</button> 
+                        <button id="add-to-string" type="button" className="myButton">Add to String (below)</button> 
                     </li>
                     {/* {velocity.map((item) => (
                         <li key={allStrings}>{airgunString.velocity}</li>
                     ))} */}
-                     <li>
-                        <h2>Edit String (value is editable in field. Click X to remove.)</h2>
-                    </li> 
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="955"  /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="850"  /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="870" /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="880"  /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="875"  /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="850" /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="855"  /> fps</li>
-                   <li><label>Velocity (fps)</label> <input type="text" defaultValue="860"  /> fps</li>
+                    
+                  
+                </ol>
+                <div>
+                        <h2>Edit String (value is editable in field.)</h2>
+                    </div> 
+                <ol className="form-list string"> 
+                    <li><label>Velocity:</label> <input type="text" defaultValue="955" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="850" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="870" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="880" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="875" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="850" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="855" /> fps <button className="x" type="button">x</button></li>
+                    <li><label>Velocity:</label> <input type="text" defaultValue="860" /> fps <button className="x" type="button">x</button></li>
                 </ol>
                 <br />
                 <div className="button-wrapper right">

@@ -532,14 +532,16 @@ header .button-wrapper {
 }
 
 ol.string {
+  display:flex;
+  flex-direction: column;
   list-style:decimal;
-  margin: 16px 0;
-  padding: 0 0 0 40px;
+  margin: 16px;
+  padding: 5px 0 5px 40px;
 }
 
 ol.string li {
   list-style: decimal;
-  margin:16px 0;
+  margin:4px 0;
   padding: 0 0 0 40px;
 
 }
@@ -549,12 +551,30 @@ ol.string em {
   width: 220px;
 }
 
-ol.string label,
+ol.string label {
+  display:inline-block;
+  max-width: 100px;
+}
+
 ol.string input {
   display:inline-block;
   width: 50%;
 }
 
+button.x {
+  display:table-cell;
+  background: white;
+  border: 1px solid silver;
+  border-radius: 5px;
+  cursor:pointer;
+  font-size:18px;
+}
+button.x:hover,
+button.x:active {
+  background: #333;
+  color: white;
+
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
