@@ -46,7 +46,8 @@ endingPressure: {
 
 // create string unlimited number me thinks. Or limit to 100?
 velocity: { 
-    type: Number,
+    type: Array,
+    default:[],
     required: [true, "You must set velocity in FPS."],
     minlength: [3, "Your velocity should be at least 3 characters long"],
 },

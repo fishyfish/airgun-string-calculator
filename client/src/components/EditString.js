@@ -3,6 +3,7 @@ import axios from 'axios';
 import {link, navigate} from '@reach/router';
 import { setServers } from 'dns';
 import io from 'socket.io-client';
+import AllStrings from './AllStrings';
 
 const EditString = (props) => {
         const [ socket ] = useState(() => io(":8000"));
@@ -17,7 +18,9 @@ const EditString = (props) => {
         const [date, setDate] = useState("");
         const [startPressure, setStartPressure] = useState(""); 
         const [endingPressure, setEndingPressure] = useState("");
-        const [velocity, setVelocity] = useState(""); 
+        const [velocity, setVelocity] = useState([]); 
+        const [allVelocity, setAllVelocity] = useState([]);
+        const [velocityCount, setVelocityCount] = useState([]);
         const [pelletWeight, setPelletWeight] = useState("");
         const { removeFromDom } = props;
         const [errs, setErrs] = useState({});
@@ -27,10 +30,10 @@ const EditString = (props) => {
             axios.get("http://localhost:8000/api/airgunString/" +  stringId) // works fine
                 .then((res) => {
                     console.log('This is so awesome' + res.data);
-                    setAirgunString(res.data);
-                    setLoaded(true);
                     const myString =res.data;
                     console.log(myString);
+                    setAirgunString(res.data);
+                    setLoaded(true);
                     setProfileName(myString.profileName);
                     setAirgunModel(myString.airgunModel);
                     setPelletBrand(myString.pelletBrand);
@@ -39,6 +42,12 @@ const EditString = (props) => {
                     setStartPressure(myString.startPressure);
                     setEndingPressure(myString.endingPressure);
                     setVelocity(myString.velocity);
+                     // my naming conventions from the get go are suck o. 
+                    // Where I'm using Strings should be Profile(s). Doh Makes
+                    // it bloody confusing.
+                    // All we're adding is Velocity and count of velocity, I think. 
+                    setAllVelocity(myString.data);
+                    setVelocityCount(myString.data.length);
                     setPelletWeight(myString.pelletWeight);
                 })
                 .catch(err=>console.log('something is errored out' + err))
@@ -47,6 +56,7 @@ const EditString = (props) => {
         const onSubmitHandler = (e) => {
             e.preventDefault();
             axios.put('http://localhost:8000/api/airgunString/'  +  stringId + '/edit', {
+              
                 profileName:profileName,    
                 airgunModel:airgunModel,      
                 pelletBrand:pelletBrand,
@@ -54,6 +64,8 @@ const EditString = (props) => {
                 date:date,
                 startPressure:startPressure,
                 endingPressure:endingPressure,
+                allVelocity:allVelocity,
+                velocityCount:velocityCount,
                 velocity:velocity,
                 pelletWeight:pelletWeight, 
             }, { withCredentials: true })  
@@ -74,13 +86,6 @@ const EditString = (props) => {
                 
             .catch(err=>console.log(err))
         };
-        // const initialList = [
-        //     {
-        //       id: 'a',
-        //       name: 'Robin',
-        //     },
-        //   ];
-        // const [list, setList] = React.useState(initialList);
 
         return (
             <form onSubmit={onSubmitHandler}>
@@ -125,7 +130,7 @@ const EditString = (props) => {
                     </li>
                     <li>
                         <label>Date</label>
-                        <input type="date" placeholder={airgunString.Date} defaultValue={airgunString.Date} onChange = {(e)=>setDate(e.target.value)} placeholder="DD/MM/YYYY" />
+                        <input type="text" placeholder={airgunString.Date} value={airgunString.Date} onChange = {(e)=>setDate(e.target.value)} placeholder="DD/MM/YYYY" />
                         {
                             errs.date ?
                             <span className="error-text">{errs.date.message}</span>
@@ -173,18 +178,20 @@ const EditString = (props) => {
                             <span className="error-text">{errs.velocity.message}</span>
                             :null
                         }
+                        {/* button needs wiring up to add a string to an array */}
                         <button id="add-to-string" type="button" className="myButton">Add to String (below)</button> 
-                    </li>
-                    {/* {velocity.map((item) => (
-                        <li key={allStrings}>{airgunString.velocity}</li>
-                    ))} */}
-                    
+                    </li>                
                   
                 </ol>
                 <div>
                         <h2>Edit String (value is editable in field.)</h2>
                     </div> 
                 <ol className="form-list string"> 
+                    {/* input fields need wiring up. */}
+                     {/* {allVelocity.map((array, index) => (
+                        <li key={index}>{airgunString.velocity}</li>
+                    ))}  */}
+
                     <li><label>Velocity:</label> <input type="text" defaultValue="955" /> fps <button className="x" type="button">x</button></li>
                     <li><label>Velocity:</label> <input type="text" defaultValue="850" /> fps <button className="x" type="button">x</button></li>
                     <li><label>Velocity:</label> <input type="text" defaultValue="870" /> fps <button className="x" type="button">x</button></li>

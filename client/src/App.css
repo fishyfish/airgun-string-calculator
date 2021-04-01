@@ -167,9 +167,9 @@ p {
   background: #ededed;
 }
 
-.form-list li:last-child {
+/* .form-list li:last-child {
   background: #ededed;
-}
+} */
 
 .form-list li label {
   margin:0;

@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link, link, navigate} from '@reach/router';
+import io from 'socket.io-client';
 
 const OneString = (props) => {
     const [airgunString, setAirgunString] = useState({})
@@ -11,6 +12,7 @@ const OneString = (props) => {
                 console.log('This is so awesome' + res.data);
                 setAirgunString(res.data)
                 setLoaded(true);
+                setAirgunString.velocity(res.data)
             })
             .catch(err=>console.log('something is errored out' + err))
     },[])
@@ -39,7 +41,10 @@ const OneString = (props) => {
                 <h2>String</h2>
                 <p><em>Pellet Weight:</em> {airgunString.pelletWeight} grains</p>
                 <ol className="string">
-                    <li><em>Velocity:</em> {airgunString.velocity} fps</li>
+                
+                {/* airgunString.map((velocity, index) => (
+                    <li key={index}><em>Velocity:</em> {airgunString.velocity} fps</li>
+                ) */}
                     <li><em>Velocity:</em> 850fps</li>
                     <li><em>Velocity:</em> 870fps</li>
                     <li><em>Velocity:</em> 880fps</li>
