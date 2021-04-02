@@ -5,17 +5,20 @@ import io from 'socket.io-client';
 
 const OneString = (props) => {
     const [airgunString, setAirgunString] = useState({})
-    const [loaded, setLoaded] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+    //const [loaded, setLoaded] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:8000/api/airgunString/" + props.id) // works fine
             .then((res) => {
                 console.log('This is so awesome' + res.data);
                 setAirgunString(res.data)
+                // 
                 setLoaded(true);
-                setAirgunString.velocity(res.data)
+                //setAirgunString.velocity(res.data)
             })
             .catch(err=>console.log('something is errored out' + err))
     },[])
+    if (loaded) {
     return (
         <div className="form-list">
                 <h2>{airgunString.profileName}'s String</h2>
@@ -41,17 +44,18 @@ const OneString = (props) => {
                 <h2>String</h2>
                 <p><em>Pellet Weight:</em> {airgunString.pelletWeight} grains</p>
                 <ol className="string">
-                
-                {/* airgunString.map((velocity, index) => (
-                    <li key={index}><em>Velocity:</em> {airgunString.velocity} fps</li>
-                ) */}
-                    <li><em>Velocity:</em> 850fps</li>
+                {
+                 airgunString.velocity.map((velocity, index) => (
+                    <li key={index}><em>Velocity:</em> {velocity} fps</li>
+                    )) 
+                }
+                    {/* <li><em>Velocity:</em> 850fps</li>
                     <li><em>Velocity:</em> 870fps</li>
                     <li><em>Velocity:</em> 880fps</li>
                     <li><em>Velocity:</em> 875fps</li>
                     <li><em>Velocity:</em> 850fps</li>
                     <li><em>Velocity:</em> 855fps</li>
-                    <li><em>Velocity:</em> 860fps</li>
+                    <li><em>Velocity:</em> 860fps</li> */}
                 </ol>
                 <p>
                 <button className="myButton secondary" onClick={() => navigate(`/`)}>
@@ -64,6 +68,15 @@ const OneString = (props) => {
                 <div className="align-right"><em>ID:</em> {airgunString._id}</div>
         </div>
     )
+ } else {
+     return (
+        <div>
+            Please wait...
+            {/* add animation... */}
+        </div>
+
+     )
+ }
 }
 
 export default OneString;

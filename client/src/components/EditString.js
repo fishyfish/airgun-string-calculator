@@ -19,8 +19,8 @@ const EditString = (props) => {
         const [startPressure, setStartPressure] = useState(""); 
         const [endingPressure, setEndingPressure] = useState("");
         const [velocity, setVelocity] = useState([]); 
-        const [allVelocity, setAllVelocity] = useState([]);
-        const [velocityCount, setVelocityCount] = useState([]);
+        // const [allVelocity, setAllVelocity] = useState([]);
+        // const [velocityCount, setVelocityCount] = useState([]);
         const [pelletWeight, setPelletWeight] = useState("");
         const { removeFromDom } = props;
         const [errs, setErrs] = useState({});
@@ -46,8 +46,8 @@ const EditString = (props) => {
                     // Where I'm using Strings should be Profile(s). Doh Makes
                     // it bloody confusing.
                     // All we're adding is Velocity and count of velocity, I think. 
-                    setAllVelocity(myString.data);
-                    setVelocityCount(myString.data.length);
+                    // setAllVelocity(myString.data);
+                    // setVelocityCount(myString.data.length);
                     setPelletWeight(myString.pelletWeight);
                 })
                 .catch(err=>console.log('something is errored out' + err))
@@ -64,8 +64,8 @@ const EditString = (props) => {
                 date:date,
                 startPressure:startPressure,
                 endingPressure:endingPressure,
-                allVelocity:allVelocity,
-                velocityCount:velocityCount,
+                // allVelocity:allVelocity,
+                // velocityCount:velocityCount,
                 velocity:velocity,
                 pelletWeight:pelletWeight, 
             }, { withCredentials: true })  
@@ -80,17 +80,33 @@ const EditString = (props) => {
                     // before leaving this component we need to be sure to disconnect our socket
                     //      to prevent a resource leak
                     socket.disconnect();
-                   navigate(`/string/${res.data._id}/`);   
+                   navigate(`/string/${res.data._id}/`);  
+                   // think about this
+                   // kevin says he'd create put in separate function. 
+                   // on success ---- return true 
+                   // on failure ----  return false
                 }
             })
                 
             .catch(err=>console.log(err))
         };
 
+        const removeShot = (index) => {
+            // new copy of velocity so we can change. 
+            let newVelocityList = [...velocity];
+            newVelocityList.splice(index, 1);
+            console.log(newVelocityList);
+            console.log(index);
+            setVelocity(newVelocityList);
+            // need to update airgunVelocity on backend. 
+            // submit
+        } 
+        // dynamically add input fields and remove
+        //https://www.youtube.com/watch?v=9IhsYu4eKJ8
         return (
-            <form onSubmit={onSubmitHandler}>
                 <div className="form-list">
                 <h2>Edit Profile</h2>
+                <form onSubmit={onSubmitHandler}>
                 <ol className="form-list" key={props.id}>
                     <li>
                         <label>Profile Name</label>
@@ -130,7 +146,7 @@ const EditString = (props) => {
                     </li>
                     <li>
                         <label>Date</label>
-                        <input type="text" placeholder={airgunString.Date} value={airgunString.Date} onChange = {(e)=>setDate(e.target.value)} placeholder="DD/MM/YYYY" />
+                        <input type="text" defaultValue={airgunString.date} onChange = {(e)=>setDate(e.target.value)} />
                         {
                             errs.date ?
                             <span className="error-text">{errs.date.message}</span>
@@ -157,8 +173,15 @@ const EditString = (props) => {
                         }
                     </li>
                     </ol>
-                   
-                        <h2>Create / Add String</h2>
+                    <div className="button-wrapper right">
+                     <button type="submit" className="myButton">Update Profile</button> 
+                    <button type="button" className="myButton secondary"  onClick={() => navigate(`/`)}>
+                        Back to All Strings
+                    </button>
+                </div>
+                    </form>
+                        
+                    <h2>Create / Add String</h2>
                      <ol className="form-list">   
                     <li>
                         <label>Pellet Weight (grains) - Same for all shots in a string.</label>
@@ -179,6 +202,7 @@ const EditString = (props) => {
                             :null
                         }
                         {/* button needs wiring up to add a string to an array */}
+                        {/* should this button be skipped, and just use the normal submit button below?  */}
                         <button id="add-to-string" type="button" className="myButton">Add to String (below)</button> 
                     </li>                
                   
@@ -187,29 +211,19 @@ const EditString = (props) => {
                         <h2>Edit String (value is editable in field.)</h2>
                     </div> 
                 <ol className="form-list string"> 
-                    {/* input fields need wiring up. */}
-                     {/* {allVelocity.map((array, index) => (
-                        <li key={index}>{airgunString.velocity}</li>
-                    ))}  */}
-
-                    <li><label>Velocity:</label> <input type="text" defaultValue="955" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="850" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="870" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="880" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="875" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="850" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="855" /> fps <button className="x" type="button">x</button></li>
-                    <li><label>Velocity:</label> <input type="text" defaultValue="860" /> fps <button className="x" type="button">x</button></li>
+                      {
+                        velocity.map((singleVel, index) => (
+                        <li key={index}>
+                            <label>{index} Velocity:</label> 
+                            <input type="text" defaultValue={singleVel} /> fps 
+                            <button className="x" type="button" onClick={() => removeShot(index)}>x</button>
+                        </li>
+                      ))}  
                 </ol>
-                <br />
-                <div className="button-wrapper right">
-                     <button type="submit" className="myButton">Update Profile</button> 
-                    <button type="button" className="myButton secondary"  onClick={() => navigate(`/`)}>
-                        Back to All Strings
-                    </button>
+               
+               
                 </div>
-                </div>
-            </form>
+            
            
         )
     }
