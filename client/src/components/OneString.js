@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 const OneString = (props) => {
     const [airgunString, setAirgunString] = useState({})
     const [loaded, setLoaded] = useState(false);
+    const [shots, setShots] = useState([]);
     //const [loaded, setLoaded] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:8000/api/airgunString/" + props.id) // works fine
@@ -15,6 +16,7 @@ const OneString = (props) => {
                 // 
                 setLoaded(true);
                 //setAirgunString.velocity(res.data)
+               shots = airgunString.velocity.length;
             })
             .catch(err=>console.log('something is errored out' + err))
     },[])
@@ -36,10 +38,15 @@ const OneString = (props) => {
                 <h2>Computations</h2>
                 <ul className="computations">
                     <li>Avg: (avg)</li>
+                    {/* sum of all shots/length of array */}
                     <li>High: (high)</li>
+                    {/* largest number */}
                     <li>Spread: (spread)</li>
+                    {/*  */}
                     <li>Std Dev: (std-dev)</li>
-                    <li>Shot Count: (shot-count)</li>
+                    
+                    <li>Shot Count: {airgunString.velocity.length} </li>
+                    {/* length of array */}
                 </ul>
                 <h2>String</h2>
                 <p><em>Pellet Weight:</em> {airgunString.pelletWeight} grains</p>
@@ -49,13 +56,8 @@ const OneString = (props) => {
                     <li key={index}><em>Velocity:</em> {velocity} fps</li>
                     )) 
                 }
-                    {/* <li><em>Velocity:</em> 850fps</li>
-                    <li><em>Velocity:</em> 870fps</li>
-                    <li><em>Velocity:</em> 880fps</li>
-                    <li><em>Velocity:</em> 875fps</li>
-                    <li><em>Velocity:</em> 850fps</li>
-                    <li><em>Velocity:</em> 855fps</li>
-                    <li><em>Velocity:</em> 860fps</li> */}
+
+              
                 </ol>
                 <p>
                 <button className="myButton secondary" onClick={() => navigate(`/`)}>

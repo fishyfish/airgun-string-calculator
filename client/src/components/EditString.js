@@ -8,7 +8,6 @@ import AllStrings from './AllStrings';
 const EditString = (props) => {
         const [ socket ] = useState(() => io(":8000"));
         const [airgunString, setAirgunString] = useState({})
-        // const [airgunString, setAirgunString] = useState("");
         const {stringId} = props;
         const [loaded, setLoaded] = useState([]);
         const [profileName, setProfileName] = useState(""); 
@@ -19,8 +18,8 @@ const EditString = (props) => {
         const [startPressure, setStartPressure] = useState(""); 
         const [endingPressure, setEndingPressure] = useState("");
         const [velocity, setVelocity] = useState([]); 
-        // const [allVelocity, setAllVelocity] = useState([]);
-        // const [velocityCount, setVelocityCount] = useState([]);
+
+        // const [list, setList] = React.useState(initialList);
         const [pelletWeight, setPelletWeight] = useState("");
         const { removeFromDom } = props;
         const [errs, setErrs] = useState({});
@@ -42,12 +41,11 @@ const EditString = (props) => {
                     setStartPressure(myString.startPressure);
                     setEndingPressure(myString.endingPressure);
                     setVelocity(myString.velocity);
+                    // setList(myString.list);
                      // my naming conventions from the get go are suck o. 
                     // Where I'm using Strings should be Profile(s). Doh Makes
                     // it bloody confusing.
                     // All we're adding is Velocity and count of velocity, I think. 
-                    // setAllVelocity(myString.data);
-                    // setVelocityCount(myString.data.length);
                     setPelletWeight(myString.pelletWeight);
                 })
                 .catch(err=>console.log('something is errored out' + err))
@@ -64,9 +62,8 @@ const EditString = (props) => {
                 date:date,
                 startPressure:startPressure,
                 endingPressure:endingPressure,
-                // allVelocity:allVelocity,
-                // velocityCount:velocityCount,
                 velocity:velocity,
+               // singleVel:singleVel,
                 pelletWeight:pelletWeight, 
             }, { withCredentials: true })  
             .then((res) => {
@@ -75,16 +72,36 @@ const EditString = (props) => {
                     setServers(res.data.errors)
                 } else {
                     console.log(res.data);
-                    // notify all of the clients that a new skiff was added
                     socket.emit("edited_airgunString", res.data);
-                    // before leaving this component we need to be sure to disconnect our socket
-                    //      to prevent a resource leak
                     socket.disconnect();
                    navigate(`/string/${res.data._id}/`);  
-                   // think about this
-                   // kevin says he'd create put in separate function. 
-                   // on success ---- return true 
-                   // on failure ----  return false
+                }
+            })
+                
+            .catch(err=>console.log(err))
+        };
+
+        // maybe don't need this. Rather use some method to add another input field with velocity as src to the list at the bottom (ui). 
+        //Then use the regular submit button to send to the DB?
+        
+          const addSingleVelocity = (index) => {
+           // e.preventDefault();
+            axios.put('http://localhost:8000/api/airgunString/'  +  stringId + '/edit', {
+                velocity:velocity,
+            }, { withCredentials: true })  
+            .then((res) => {
+                if(res.data.errors){
+                    console.log(res.data.errors)
+                    setServers(res.data.errors)
+                } else {
+                    let newVelocityList = [...velocity];
+                    newVelocityList.push(index);
+                    setVelocity(newVelocityList);
+                    console.log("submitted ew velocity list: " + newVelocityList);
+                    console.log("index " + index);
+                    socket.emit("edited_airgunString ", res.data);
+                    socket.disconnect();                   
+                   //navigate(`/string/${res.data._id}/`);  
                 }
             })
                 
@@ -92,17 +109,15 @@ const EditString = (props) => {
         };
 
         const removeShot = (index) => {
-            // new copy of velocity so we can change. 
             let newVelocityList = [...velocity];
-            newVelocityList.splice(index, 1);
-            console.log(newVelocityList);
-            console.log(index);
+            newVelocityList.splice(index, 1 );
+            console.log("new velocity list: " + newVelocityList);
+            console.log("index " + index);
             setVelocity(newVelocityList);
-            // need to update airgunVelocity on backend. 
-            // submit
+            socket.emit("edited_airgunString ", velocity);
+            socket.disconnect();  
         } 
-        // dynamically add input fields and remove
-        //https://www.youtube.com/watch?v=9IhsYu4eKJ8
+      
         return (
                 <div className="form-list">
                 <h2>Edit Profile</h2>
@@ -174,15 +189,15 @@ const EditString = (props) => {
                     </li>
                     </ol>
                     <div className="button-wrapper right">
-                     <button type="submit" className="myButton">Update Profile</button> 
+                    {/* <button type="submit" className="myButton">Update Profile</button>  */}
                     <button type="button" className="myButton secondary"  onClick={() => navigate(`/`)}>
                         Back to All Strings
                     </button>
                 </div>
-                    </form>
+                    
                         
                     <h2>Create / Add String</h2>
-                     <ol className="form-list">   
+                    <ol className="form-list">
                     <li>
                         <label>Pellet Weight (grains) - Same for all shots in a string.</label>
                         <input type="number" defaultValue={airgunString.pelletWeight} onChange = {(e)=>setPelletWeight(e.target.value)}/>
@@ -192,39 +207,48 @@ const EditString = (props) => {
                             :null
                         }
                     </li>
+                    </ol>  
+                    <ol className="form-list"> 
                     <li>
-                        {/* defaultValue={airgunString.velocity} */}
+                    
+                        {/* defaultValue={airgunString.velocity} */} 
+                        {/* complete breaks form onClick in field */}
+                        {/* onChange={(e)=>setVelocity(e.target.value)} */}
+
                         <label>Velocity (fps)</label>
-                        <input type="text"  onChange = {(e)=>setVelocity(e.target.value)}/>
+                        <input type="text" defaultValue="" name="" placeholder="add shot in fps" onBlur={(e)=>addSingleVelocity(e.target.value)} />
                         {
                             errs.velocity ?
                             <span className="error-text">{errs.velocity.message}</span>
                             :null
                         }
-                        {/* button needs wiring up to add a string to an array */}
-                        {/* should this button be skipped, and just use the normal submit button below?  */}
-                        <button id="add-to-string" type="button" className="myButton">Add to String (below)</button> 
-                    </li>                
-                  
+                        <button id="add-to-string" 
+                            type="button" 
+                            className="myButton">Add to String (below)</button> 
+                    </li>    
                 </ol>
                 <div>
-                        <h2>Edit String (value is editable in field.)</h2>
-                    </div> 
+                    <h2>Edit String (value is editable in field)</h2>
+                </div> 
                 <ol className="form-list string"> 
                       {
                         velocity.map((singleVel, index) => (
                         <li key={index}>
-                            <label>{index} Velocity:</label> 
-                            <input type="text" defaultValue={singleVel} /> fps 
+                            <label> Velocity:&nbsp;</label> 
+                            <input type="text" defaultValue={singleVel}  onBlur={(e)=>addSingleVelocity(e.target.value)}/>&nbsp;fps&nbsp; 
                             <button className="x" type="button" onClick={() => removeShot(index)}>x</button>
                         </li>
                       ))}  
                 </ol>
-               
-               
+                <ul className='form-list'>
+                    <li>
+                        <button type="submit" className="myButton primary">Save Profile and Shot String</button>
+                    </li>
+                </ul>
+                </form> 
                 </div>
             
-           
+            
         )
     }
 
