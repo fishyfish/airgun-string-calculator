@@ -176,6 +176,11 @@ p {
   padding:0;
 }
 
+.form-list.string input,
+.form-list.string button {
+  margin:0 5px;
+}
+
 .onoffswitch {
   position: relative;
   width: 220px;
@@ -529,6 +534,10 @@ header .button-wrapper {
 .computations li {
   background: #EDEDED;
   margin-bottom: 4px;
+}
+.computations input {
+  margin-left:5px;
+  max-width:75px;
 }
 
 ol.string {
