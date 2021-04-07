@@ -112,8 +112,8 @@ const EditString = (props) => {
                     console.log("putting new velocity list: " + newVelocityList);
                     console.log("velocity " + velocity);
                     //console.log("index " + index);
-                    socket.emit("edited_airgunString ", res.data);
-                    socket.disconnect();                   
+                    //socket.emit("edited_airgunString ", res.data);
+                    //socket.disconnect();                   
                    //navigate(`/string/${res.data._id}/`);  
                 }
             })
@@ -259,7 +259,7 @@ const EditString = (props) => {
                 </div> 
                 <ol className="form-list string"> 
                       {
-                        this.state.velocity.map((singleVel, index) => (
+                        velocity.map((singleVel, index) => (
                         <li key={index}>
                             <label> Velocity:</label> 
                             <input type="number" defaultValue={singleVel}  onBlur={(e)=>addSingleVelocity(parseInt(e.target.value))}/> fps 
@@ -270,22 +270,22 @@ const EditString = (props) => {
                 <h2>Calculations</h2>
                 <ul className="computations">
                     <li>Avg: 
-                    <input type="number" value={velocityAverage(velocity).toFixed(0)}
-                        onChange = {(e)=>setLow(e.target.value)} readOnly />
+                    <input type="text" value={velocityAverage(velocity).toFixed(0)}
+                        onChange = {(e)=>setAverage(e.target.value)} readOnly />
                     </li>
                     <li>High: 
-                    <input type="number" value={Math.max(...velocity)}
-                        onChange = {(e)=>setLow(e.target.value)} readOnly />
+                    <input type="text" value={Math.max(...velocity)}
+                        onChange = {(e)=>setHigh(e.target.value)} readOnly />
                     </li>
                     <li>Low: 
-                    <input type="number" value={Math.min(...velocity)}
+                    <input type="text" value={Math.min(...velocity)}
                         onChange = {(e)=>setLow(e.target.value)} readOnly />
                     </li>
                     <li>Std Dev: 
-                        <input type="number" value={standardDeviation(velocity).toFixed(2)} 
+                        <input type="text" value={standardDeviation(velocity).toFixed(2)} 
                         onChange = {(e)=>setStdDev(e.target.value)} readOnly /></li>
                     <li>Shot Count:  
-                    <input type="number" value={velocity.length} 
+                    <input type="text" value={velocity.length} 
                         onChange = {(e)=>setShotCount(e.target.value)} readOnly/>
                     </li>
                     {/* <li>FPE: <input type="number" value={pelletWeight * velocity * velocity / 450240 * 100 / 100} 

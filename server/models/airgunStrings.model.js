@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 const AirgunStringSchema = new mongoose.Schema({
-// Register/Login
-// userName
-// email
-// password
 
-// since this form works as data collection to be shared with others all form inputs should be required. 
-//profile
 profileName: { 
     type: String,
     required: [true, "You must have a profile name"],
@@ -43,9 +37,6 @@ endingPressure: {
     required: [true, "Please set an ending pressure in PSI"],
     minlength: [3, "Your ending pressure should be at least 3 characters long"],
 },
-
-// create string unlimited number me thinks. Or limit to 100?
-// type: [Number] suggested... 
 velocity: { 
     type:  Array,
     default:[],
@@ -59,25 +50,32 @@ pelletWeight: {
 },
 fpe: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 },
 // calculations
 average: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 },
 high: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 }, 
 low: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 }, 
 spread: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 }, 
 stdDev: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 }, 
 shotCount: { 
     type: Number,
+    required: [false, "Stuff goes here"],
 },
 }, {timestamps: true}) 
 // THIS: collection names are all lowercase and plural based on this string "Skiff"

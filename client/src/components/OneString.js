@@ -18,7 +18,7 @@ const OneString = (props) => {
         axios.get("http://localhost:8000/api/airgunString/" + props.id) // works fine
             .then((res) => {
                 console.log('This is so awesome' + res.data);
-                setAirgunString(res.data)
+                setAirgunString(res.data);
                 setLoaded(true);
                 setAverage(res.average);
                 setHigh(res.high);
@@ -55,7 +55,7 @@ const OneString = (props) => {
                     <li className="newLine"><em>Ending Pressure:</em> {airgunString.endingPressure} psi</li>  
                 </ol>
                 {/* needs wiring up below hmmmm*/}
-                {/* <h2>Computations</h2>
+                {/* <h2>Calculations</h2>
                 <ul className="computations">
                     <li>Avg: 
                     <input type="number" value={velocityAverage(velocity).toFixed(0)}
